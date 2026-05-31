@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SecuriCompare — Comparatifs Sécurité Domestique</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root{--noir:#0d0d0d;--blanc:#f4f2ed;--accent:#e8401c;--accent2:#f5a623;--gris:#6b6b6b;--gris-clair:#e8e5de;--vert:#1a7a4a;--card:#ffffff;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--blanc);color:var(--noir);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;}
+
+/* NAV */
+nav{background:var(--noir);height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:200;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--blanc);text-decoration:none;letter-spacing:-.02em;cursor:pointer;}
+.logo span{color:var(--accent);}
+.nav-links{display:flex;gap:6px;list-style:none;}
+.nav-links a{color:#888;text-decoration:none;font-size:.82rem;font-weight:500;transition:color .2s,background .2s;padding:6px 12px;border-radius:4px;cursor:pointer;}
+.nav-links a:hover{color:var(--blanc);}
+.nav-links a.active{color:var(--blanc);background:#1a1a1a;}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:6px 14px!important;border-radius:4px!important;}
+.nav-cta:hover{background:#c93516!important;}
+
+/* PAGES */
+.page{display:none;}.page.active{display:block;}
+
+/* ══ HOME ══ */
+.hero{background:var(--noir);padding:80px 32px 70px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(232,64,28,.12) 0%,transparent 65%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-50px;left:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(245,166,35,.06) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{max-width:900px;margin:0 auto;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(232,64,28,.15);border:1px solid rgba(232,64,28,.3);color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:22px;}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.06;letter-spacing:-.04em;color:var(--blanc);margin-bottom:22px;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hero-desc{color:#999;font-size:1rem;max-width:520px;margin-bottom:36px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{background:var(--accent);color:#fff;padding:12px 24px;border-radius:6px;font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;text-decoration:none;}
+.btn-primary:hover{background:#c93516;transform:translateY(-1px);}
+.btn-secondary{background:transparent;color:var(--blanc);padding:12px 24px;border-radius:6px;font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;border:1px solid #333;cursor:pointer;transition:border-color .2s;text-decoration:none;}
+.btn-secondary:hover{border-color:#666;}
+.hero-stats{display:flex;gap:40px;margin-top:48px;padding-top:32px;border-top:1px solid #1e1e1e;flex-wrap:wrap;}
+.stat-item .num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--blanc);}
+.stat-item .num span{color:var(--accent);}
+.stat-item .lbl{font-size:.78rem;color:#666;margin-top:2px;}
+
+.home-cats{max-width:960px;margin:64px auto;padding:0 24px;}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;}
+.section-head h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;letter-spacing:-.03em;}
+.section-head a{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:500;cursor:pointer;}
+.cats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.cat-card{background:var(--card);border:1px solid var(--gris-clair);border-radius:10px;padding:28px 24px;cursor:pointer;transition:box-shadow .3s,transform .3s,border-color .3s;position:relative;overflow:hidden;}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.cat-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);transform:translateY(-3px);border-color:#d0ccc4;}
+.cat-card:hover::before{transform:scaleX(1);}
+.cat-icon{font-size:2rem;margin-bottom:14px;}
+.cat-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:6px;letter-spacing:-.01em;}
+.cat-card p{font-size:.82rem;color:var(--gris);line-height:1.5;}
+.cat-count{display:inline-block;margin-top:14px;font-size:.72rem;font-weight:600;color:var(--accent);background:rgba(232,64,28,.08);padding:3px 10px;border-radius:12px;}
+
+.featured-section{background:var(--noir);padding:64px 24px;}
+.featured-inner{max-width:960px;margin:0 auto;}
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;}
+.art-mini{background:#161616;border:1px solid #1e1e1e;border-radius:10px;padding:24px 22px;cursor:pointer;transition:border-color .3s,transform .3s;}
+.art-mini:hover{border-color:#333;transform:translateY(-2px);}
+.art-mini-icon{font-size:1.6rem;margin-bottom:12px;}
+.art-mini-badge{display:inline-block;background:var(--accent);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-bottom:8px;}
+.art-mini h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--blanc);line-height:1.3;margin-bottom:8px;letter-spacing:-.01em;}
+.art-mini p{color:#666;font-size:.78rem;line-height:1.5;margin-bottom:14px;}
+.art-mini-meta{font-size:.7rem;color:#555;}
+
+.why-section{max-width:960px;margin:64px auto;padding:0 24px 64px;}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.why-item{text-align:center;padding:28px 20px;}
+.why-icon{font-size:1.8rem;margin-bottom:14px;}
+.why-item h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:8px;}
+.why-item p{font-size:.82rem;color:var(--gris);line-height:1.55;}
+
+/* ══ ARTICLE SHARED ══ */
+.article-hero{background:var(--noir);padding:60px 32px 52px;position:relative;overflow:hidden;}
+.article-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(232,64,28,.1) 0%,transparent 65%);pointer-events:none;}
+.breadcrumb{font-size:.75rem;color:#555;margin-bottom:16px;}
+.breadcrumb a{color:#777;text-decoration:none;cursor:pointer;}
+.breadcrumb a:hover{color:var(--accent);}
+.art-badge{display:inline-block;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:2px;margin-bottom:16px;}
+.article-hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:var(--blanc);line-height:1.1;letter-spacing:-.03em;max-width:680px;margin-bottom:16px;}
+.article-hero h1 em{font-style:normal;color:var(--accent);}
+.art-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:.78rem;color:#666;}
+.article-body{max-width:820px;margin:0 auto;padding:48px 24px 80px;}
+.art-intro{color:#444;font-size:1rem;margin-bottom:28px;line-height:1.75;}
+.sommaire{background:var(--noir);color:var(--blanc);border-radius:8px;padding:24px 28px;margin:28px 0 40px;}
+.sommaire h3{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.sommaire ol{padding-left:18px;display:flex;flex-direction:column;gap:5px;}
+.sommaire li a{color:#bbb;text-decoration:none;font-size:.88rem;}
+.products-list{display:flex;flex-direction:column;gap:28px;}
+.p-card{background:var(--card);border:1px solid #e0ddd7;border-radius:12px;overflow:hidden;transition:box-shadow .3s,transform .3s;}
+.p-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-2px);}
+.p-card-top{display:flex;align-items:stretch;}
+.rank{width:64px;min-height:76px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;color:#fff;flex-shrink:0;}
+.rank.gold{background:#c9940a;}.rank.silver{background:#7a7a7a;}.rank.bronze{background:#a0622a;}.rank.other{background:var(--noir);}
+.p-title-block{padding:16px 18px;flex:1;}
+.p-label{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);margin-bottom:3px;}
+.p-title-block h2{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:-.015em;}
+.p-price{padding:16px 20px 16px 0;font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--accent);white-space:nowrap;display:flex;align-items:center;}
+.p-body{padding:4px 22px 22px;border-top:1px solid var(--gris-clair);}
+.p-stars{display:flex;align-items:center;gap:3px;padding-top:14px;margin-bottom:10px;}
+.star{color:var(--accent2);font-size:.9rem;}.star.e{color:#ddd;}
+.p-stars span{font-size:.78rem;color:var(--gris);margin-left:5px;}
+.p-desc{font-size:.9rem;color:#444;margin-bottom:16px;line-height:1.7;}
+.pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+.pros,.cons{border-radius:6px;padding:12px 14px;}
+.pros{background:#f0faf4;}.cons{background:#fdf4f2;}
+.pros h4{color:var(--vert);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;}
+.cons h4{color:var(--accent);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;}
+.pros ul,.cons ul{padding-left:14px;}
+.pros li,.cons li{font-size:.8rem;color:#333;margin-bottom:3px;}
+.cta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.cta-btn{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:.84rem;padding:10px 20px;border-radius:5px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s;}
+.cta-btn:hover{background:#c93516;transform:scale(1.02);}
+.aff-note{font-size:.72rem;color:#aaa;font-style:italic;}
+.verdict{background:var(--noir);color:var(--blanc);border-radius:10px;padding:30px 34px;margin-top:40px;}
+.verdict h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--accent2);margin-bottom:12px;}
+.verdict p{color:#bbb;font-size:.9rem;line-height:1.7;}
+.disclaimer{font-size:.74rem;color:#aaa;border-top:1px solid #ddd;margin-top:40px;padding-top:20px;line-height:1.6;}
+
+.more-articles{background:var(--noir);padding:48px 24px;}
+.more-inner{max-width:820px;margin:0 auto;}
+.more-inner h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--blanc);margin-bottom:20px;letter-spacing:-.02em;}
+.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.more-card{background:#161616;border:1px solid #1e1e1e;border-radius:8px;padding:18px 20px;cursor:pointer;transition:border-color .2s;display:flex;align-items:center;gap:14px;}
+.more-card:hover{border-color:#333;}
+.more-card-icon{font-size:1.4rem;flex-shrink:0;}
+.more-card h4{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;color:var(--blanc);margin-bottom:3px;}
+.more-card p{font-size:.74rem;color:#666;}
+
+footer{background:var(--noir);color:#555;text-align:center;padding:24px;font-size:.78rem;}
+footer a{color:#666;text-decoration:none;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.fade-in{animation:fadeUp .5s ease both;}
+.d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}.d5{animation-delay:.25s}
+
+@media(max-width:640px){
+  .cats-grid,.why-grid,.articles-grid,.more-grid{grid-template-columns:1fr;}
+  .pc-grid{grid-template-columns:1fr;}
+  .p-price{display:none;}
+  .nav-links li:not(:first-child):not(:last-child){display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo" onclick="showPage('home')">Securi<span>Compare</span></span>
+  <ul class="nav-links">
+    <li><a id="nav-cameras" onclick="showPage('cameras')">📷 Caméras</a></li>
+    <li><a id="nav-alarmes" onclick="showPage('alarmes')">🚨 Alarmes</a></li>
+    <li><a id="nav-serrures" onclick="showPage('serrures')">🔐 Serrures</a></li>
+    <li><a class="nav-cta" href="#">Guide d'achat</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Comparatifs indépendants 2026</div>
+      <h1>La sécurité de<br>votre maison,<br><em>simplifiée.</em></h1>
+      <p class="hero-desc">On teste, compare et classe les meilleurs équipements de sécurité domestique pour vous aider à choisir sans vous tromper.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('cameras')">Voir les comparatifs →</button>
+        <a href="#" class="btn-secondary">Guide d'achat</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="num">15<span>+</span></div><div class="lbl">Produits testés</div></div>
+        <div class="stat-item"><div class="num">3</div><div class="lbl">Catégories couvertes</div></div>
+        <div class="stat-item"><div class="num">100<span>%</span></div><div class="lbl">Avis indépendants</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-cats">
+    <div class="section-head"><h2>Nos catégories</h2><a onclick="showPage('cameras')">Tout voir →</a></div>
+    <div class="cats-grid">
+      <div class="cat-card" onclick="showPage('cameras')">
+        <div class="cat-icon">📷</div>
+        <h3>Caméras de surveillance</h3>
+        <p>Intérieure, extérieure, batterie ou filaire — trouvez la caméra adaptée à votre logement.</p>
+        <span class="cat-count">5 comparatifs</span>
+      </div>
+      <div class="cat-card" onclick="showPage('alarmes')">
+        <div class="cat-icon">🚨</div>
+        <h3>Systèmes d'alarme</h3>
+        <p>Détecteurs de mouvement, sirènes connectées et kits alarme complets comparés.</p>
+        <span class="cat-count">5 comparatifs</span>
+      </div>
+      <div class="cat-card" onclick="showPage('serrures')">
+        <div class="cat-icon">🔐</div>
+        <h3>Serrures connectées</h3>
+        <p>Smart locks, digicodes et vérins électriques pour sécuriser vos accès.</p>
+        <span class="cat-count">5 comparatifs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="featured-section">
+    <div class="featured-inner">
+      <div class="section-head">
+        <h2 style="color:var(--blanc)">Tous nos comparatifs</h2>
+      </div>
+      <div class="articles-grid">
+        <div class="art-mini" onclick="showPage('cameras')">
+          <div class="art-mini-icon">📷</div>
+          <div class="art-mini-badge">Comparatif</div>
+          <h3>Top 5 Caméras de Surveillance 2026</h3>
+          <p>De 39€ à 179€ — notre verdict pour chaque budget.</p>
+          <div class="art-mini-meta">⏱ 12 min · ✅ Mai 2026</div>
+        </div>
+        <div class="art-mini" onclick="showPage('alarmes')">
+          <div class="art-mini-icon">🚨</div>
+          <div class="art-mini-badge">Comparatif</div>
+          <h3>Top 5 Systèmes d'Alarme 2026</h3>
+          <p>Kits connectés, sans abonnement ou professionnels — lequel choisir ?</p>
+          <div class="art-mini-meta">⏱ 10 min · ✅ Mai 2026</div>
+        </div>
+        <div class="art-mini" onclick="showPage('serrures')">
+          <div class="art-mini-icon">🔐</div>
+          <div class="art-mini-badge">Comparatif</div>
+          <h3>Top 5 Serrures Connectées 2026</h3>
+          <p>Smart locks et digicodes — sécurisez vos accès sans clé.</p>
+          <div class="art-mini-meta">⏱ 9 min · ✅ Mai 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="section-head"><h2>Pourquoi nous faire confiance ?</h2></div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">🔬</div>
+        <h4>Tests indépendants</h4>
+        <p>Chaque produit est évalué selon des critères objectifs. Aucune marque ne paie pour figurer dans nos classements.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🔄</div>
+        <h4>Mis à jour régulièrement</h4>
+        <p>Les marchés évoluent vite. Nos comparatifs sont actualisés dès qu'un nouveau produit mérite sa place.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💶</div>
+        <h4>Gratuit & transparent</h4>
+        <p>Ce site est financé par des commissions d'affiliation. Vous payez le même prix, on perçoit une petite commission.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CAMÉRAS ══════════ -->
+<div id="page-cameras" class="page">
+  <div class="article-hero">
+    <div style="max-width:820px;margin:0 auto;">
+      <div class="breadcrumb"><a onclick="showPage('home')">Accueil</a> › Caméras de surveillance</div>
+      <div class="art-badge">Comparatif mis à jour</div>
+      <h1>Top 5 Caméras de<br>Surveillance <em>2026</em></h1>
+      <div class="art-meta"><span>🕐 20 mai 2026</span><span>✍️ SecuriCompare</span><span>📖 12 min</span></div>
+    </div>
+  </div>
+  <div class="article-body">
+    <p class="art-intro">Résolution 4K, vision nocturne couleur, batterie longue durée ou filaire 24h/24 ? On a passé en revue les 5 meilleures caméras de surveillance du marché pour tous les budgets, de 39€ à 179€.</p>
+    <div class="sommaire">
+      <h3>Sommaire</h3>
+      <ol>
+        <li><a href="#">🥇 Reolink Argus 4 Pro — Meilleure caméra extérieure</a></li>
+        <li><a href="#">🥈 TP-Link Tapo C320WS — Meilleur rapport qualité/prix</a></li>
+        <li><a href="#">🥉 Eufy SoloCam S340 — Meilleure sans abonnement</a></li>
+        <li><a href="#">#4 Arlo Pro 5S — Meilleure qualité image</a></li>
+        <li><a href="#">#5 Blink Outdoor 4 — Meilleure entrée de gamme</a></li>
+      </ol>
+    </div>
+    <div class="products-list">
+      <div class="p-card fade-in d1">
+        <div class="p-card-top"><div class="rank gold">#1</div><div class="p-title-block"><div class="p-label">Meilleure caméra extérieure</div><h2>Reolink Argus 4 Pro</h2></div><div class="p-price">~89€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span>5/5 — Notre coup de cœur</span></div>
+          <p class="p-desc">4K, vision nocturne couleur, 6 mois d'autonomie sur batterie, installation sans câble en 10 minutes. Aucun abonnement obligatoire. Le meilleur choix polyvalent pour surveiller entrée, jardin ou garage.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Vidéo 4K très nette</li><li>Vision nocturne couleur</li><li>Batterie 6 mois</li><li>Pas d'abonnement cloud</li><li>Installation sans câble</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>App parfois lente</li><li>Stockage microSD uniquement</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d2">
+        <div class="p-card-top"><div class="rank silver">#2</div><div class="p-title-block"><div class="p-label">Meilleur rapport qualité/prix</div><h2>TP-Link Tapo C320WS</h2></div><div class="p-price">~44€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span>4/5</span></div>
+          <p class="p-desc">Pour moins de 50€ : image 4MP, vision nocturne 30m, résistance IP66. Filaire, elle fonctionne 24h/24 sans interruption. Le choix idéal pour débuter sans se ruiner.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Prix &lt; 50€</li><li>IP66 résistante pluie</li><li>Fonctionne 24h/24</li><li>App simple</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Nécessite prise secteur</li><li>Détection parfois imprécise</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d3">
+        <div class="p-card-top"><div class="rank bronze">#3</div><div class="p-title-block"><div class="p-label">Meilleure sans abonnement</div><h2>Eufy SoloCam S340</h2></div><div class="p-price">~129€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span>4/5</span></div>
+          <p class="p-desc">Stockage local 8Go intégré, 0€/mois d'abonnement, zoom optique x8. Vos vidéos restent chez vous, aucun serveur cloud externe.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>0€/mois</li><li>Stockage local 8Go</li><li>Zoom x8</li><li>Données privées</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Prix plus élevé</li><li>App moins mature</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d4">
+        <div class="p-card-top"><div class="rank other">#4</div><div class="p-title-block"><div class="p-label">Meilleure qualité image</div><h2>Arlo Pro 5S 2K</h2></div><div class="p-price">~179€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span>4/5</span></div>
+          <p class="p-desc">Image 2K ultra-nette, détection IA personnes/véhicules/animaux, compatible Alexa & Google Home. La référence premium, avec abonnement indispensable.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Image 2K exceptionnelle</li><li>Détection IA précise</li><li>Domotique intégrée</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Prix élevé</li><li>Abonnement obligatoire</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d5">
+        <div class="p-card-top"><div class="rank other">#5</div><div class="p-title-block"><div class="p-label">Meilleure entrée de gamme</div><h2>Blink Outdoor 4</h2></div><div class="p-price">~39€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span class="star e">★</span><span>3/5</span></div>
+          <p class="p-desc">2 ans d'autonomie sur piles AA, intégration Alexa, prix mini. Correcte pour débuter, mais 1080p et vision nocturne N&B restent ses limites.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>~39€</li><li>2 ans sur piles</li><li>Alexa natif</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>1080p seulement</li><li>Vision nocturne N&B</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="verdict"><h3>Notre verdict final</h3><p>Pour la majorité des profils, la <strong>Reolink Argus 4 Pro</strong> est le meilleur choix. Budget serré ? La <strong>TP-Link Tapo C320WS</strong> à 44€ fait très bien le travail. Priorité vie privée ? La <strong>Eufy SoloCam S340</strong> ne partage aucune donnée cloud.</p></div>
+    <p class="disclaimer">⚠️ <strong>Liens d'affiliation :</strong> SecuriCompare participe au programme Amazon Partenaires. Si vous achetez via nos liens, nous percevons une petite commission sans aucun surcoût pour vous.</p>
+  </div>
+  <div class="more-articles"><div class="more-inner"><h3>Lire aussi</h3><div class="more-grid"><div class="more-card" onclick="showPage('alarmes')"><div class="more-card-icon">🚨</div><div><h4>Top 5 Systèmes d'Alarme 2026</h4><p>Kits connectés sans abonnement</p></div></div><div class="more-card" onclick="showPage('serrures')"><div class="more-card-icon">🔐</div><div><h4>Top 5 Serrures Connectées 2026</h4><p>Smart locks et digicodes comparés</p></div></div></div></div></div>
+  <footer><p>© 2026 SecuriCompare — <a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">Contact</a></p></footer>
+</div>
+
+<!-- ══════════ ALARMES ══════════ -->
+<div id="page-alarmes" class="page">
+  <div class="article-hero">
+    <div style="max-width:820px;margin:0 auto;">
+      <div class="breadcrumb"><a onclick="showPage('home')">Accueil</a> › Systèmes d'alarme</div>
+      <div class="art-badge">Comparatif mis à jour</div>
+      <h1>Top 5 Systèmes<br>d'Alarme <em>2026</em></h1>
+      <div class="art-meta"><span>🕐 20 mai 2026</span><span>✍️ SecuriCompare</span><span>📖 10 min</span></div>
+    </div>
+  </div>
+  <div class="article-body">
+    <p class="art-intro">Kit sans abonnement, alarme connectée pilotable depuis le téléphone ou système pro avec télésurveillance ? On a comparé les 5 meilleurs systèmes d'alarme du marché pour protéger votre domicile efficacement, de 60€ à 300€.</p>
+    <div class="sommaire">
+      <h3>Sommaire</h3>
+      <ol>
+        <li><a href="#">🥇 Ajax StarterKit — Meilleur système connecté</a></li>
+        <li><a href="#">🥈 Somfy One+ — Meilleur tout-en-un</a></li>
+        <li><a href="#">🥉 Diagral DIAG42SF — Meilleur sans abonnement</a></li>
+        <li><a href="#">#4 Ring Alarm 8 pièces — Meilleur écosystème Amazon</a></li>
+        <li><a href="#">#5 Yale Smart Home IA-320 — Meilleure entrée de gamme</a></li>
+      </ol>
+    </div>
+    <div class="products-list">
+      <div class="p-card fade-in d1">
+        <div class="p-card-top"><div class="rank gold">#1</div><div class="p-title-block"><div class="p-label">Meilleur système connecté</div><h2>Ajax StarterKit</h2></div><div class="p-price">~200€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span>5/5 — Notre coup de cœur</span></div>
+          <p class="p-desc">La référence professionnelle accessible aux particuliers. Protocole radio chiffré pratiquement inviolable, app la plus aboutie du marché, extensible à l'infini. Batterie 7 ans sur les détecteurs.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Protocole radio chiffré</li><li>App professionnelle</li><li>Extensible à l'infini</li><li>Pas d'abonnement obligatoire</li><li>Batterie 7 ans capteurs</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Prix plus élevé</li><li>Configuration à prévoir</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d2">
+        <div class="p-card-top"><div class="rank silver">#2</div><div class="p-title-block"><div class="p-label">Meilleur tout-en-un</div><h2>Somfy One+</h2></div><div class="p-price">~230€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span>4/5</span></div>
+          <p class="p-desc">Caméra HD + sirène 110dB + détecteur de mouvement dans un seul boîtier. Installation en 5 minutes. Compatible TaHoma pour piloter toute la domotique Somfy depuis une seule app.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Caméra + alarme en 1</li><li>Installation ultra-simple</li><li>Sirène 110dB intégrée</li><li>Compatible domotique Somfy</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Abonnement cloud recommandé</li><li>Moins extensible qu'Ajax</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d3">
+        <div class="p-card-top"><div class="rank bronze">#3</div><div class="p-title-block"><div class="p-label">Meilleur sans abonnement</div><h2>Diagral DIAG42SF</h2></div><div class="p-price">~130€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span>4/5</span></div>
+          <p class="p-desc">Marque française fiable, fonctionnement entièrement sans abonnement mensuel. Kit complet avec centrale, 2 détecteurs PIR, télécommande et sirène intérieure. Idéal pour éviter tout frais récurrent.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Zéro abonnement</li><li>Kit complet inclus</li><li>Marque française</li><li>Installation simple</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>App basique</li><li>Pas de caméra intégrée</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d4">
+        <div class="p-card-top"><div class="rank other">#4</div><div class="p-title-block"><div class="p-label">Meilleur écosystème Amazon</div><h2>Ring Alarm 8 pièces</h2></div><div class="p-price">~199€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span>4/5</span></div>
+          <p class="p-desc">Kit 8 pièces couvrant une maison entière : centrale, 5 détecteurs d'ouverture, détecteur de mouvement, clavier et sirène. Intégration parfaite avec Alexa et les caméras Ring.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Kit 8 pièces complet</li><li>Intégration Alexa native</li><li>Compatible caméras Ring</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Abonnement recommandé</li><li>Lié à l'écosystème Amazon</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d5">
+        <div class="p-card-top"><div class="rank other">#5</div><div class="p-title-block"><div class="p-label">Meilleure entrée de gamme</div><h2>Yale Smart Home IA-320</h2></div><div class="p-price">~65€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span class="star e">★</span><span>3/5</span></div>
+          <p class="p-desc">Pour 65€ : centrale, détecteur de mouvement, détecteur d'ouverture et télécommande. Suffisant pour un petit appartement. Extensible avec des accessoires Yale vendus séparément.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Prix accessible ~65€</li><li>Kit de base complet</li><li>Extensible</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Pas d'app connectée</li><li>Sirène limitée</li><li>Technologie basique</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="verdict"><h3>Notre verdict final</h3><p>Pour une protection sérieuse, l'<strong>Ajax StarterKit</strong> est le meilleur investissement. Budget intermédiaire avec domotique ? La <strong>Somfy One+</strong> est idéale. Vous voulez 0€/mois ? Le <strong>Diagral DIAG42SF</strong> fait parfaitement le travail.</p></div>
+    <p class="disclaimer">⚠️ <strong>Liens d'affiliation :</strong> SecuriCompare participe au programme Amazon Partenaires. Commission perçue sans surcoût pour vous.</p>
+  </div>
+  <div class="more-articles"><div class="more-inner"><h3>Lire aussi</h3><div class="more-grid"><div class="more-card" onclick="showPage('cameras')"><div class="more-card-icon">📷</div><div><h4>Top 5 Caméras de Surveillance 2026</h4><p>De 39€ à 179€</p></div></div><div class="more-card" onclick="showPage('serrures')"><div class="more-card-icon">🔐</div><div><h4>Top 5 Serrures Connectées 2026</h4><p>Smart locks et digicodes</p></div></div></div></div></div>
+  <footer><p>© 2026 SecuriCompare — <a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">Contact</a></p></footer>
+</div>
+
+<!-- ══════════ SERRURES ══════════ -->
+<div id="page-serrures" class="page">
+  <div class="article-hero">
+    <div style="max-width:820px;margin:0 auto;">
+      <div class="breadcrumb"><a onclick="showPage('home')">Accueil</a> › Serrures connectées</div>
+      <div class="art-badge">Comparatif mis à jour</div>
+      <h1>Top 5 Serrures<br>Connectées <em>2026</em></h1>
+      <div class="art-meta"><span>🕐 20 mai 2026</span><span>✍️ SecuriCompare</span><span>📖 9 min</span></div>
+    </div>
+  </div>
+  <div class="article-body">
+    <p class="art-intro">Ouvrir sa porte depuis son téléphone, créer des codes temporaires pour ses invités, recevoir une alerte si quelqu'un entre… Les serrures connectées révolutionnent la sécurité de votre porte d'entrée. On a comparé les 5 meilleures du marché, de 80€ à 280€.</p>
+    <div class="sommaire">
+      <h3>Sommaire</h3>
+      <ol>
+        <li><a href="#">🥇 Nuki Smart Lock Ultra — Meilleure serrure connectée</a></li>
+        <li><a href="#">🥈 Yale Linus Smart Lock — Meilleur rapport qualité/prix</a></li>
+        <li><a href="#">🥉 Tedee GO — Meilleure installation facile</a></li>
+        <li><a href="#">#4 Schlage Encode Plus — Meilleure pour Apple Home</a></li>
+        <li><a href="#">#5 eQ-3 HomeMatic — Meilleure entrée de gamme</a></li>
+      </ol>
+    </div>
+    <div class="products-list">
+      <div class="p-card fade-in d1">
+        <div class="p-card-top"><div class="rank gold">#1</div><div class="p-title-block"><div class="p-label">Meilleure serrure connectée</div><h2>Nuki Smart Lock Ultra</h2></div><div class="p-price">~230€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span>5/5 — Notre coup de cœur</span></div>
+          <p class="p-desc">S'installe en 3 minutes sur votre cylindre existant. Wi-Fi intégré sans bridge, ouverture automatique par détection d'approche, codes invités temporaires. Compatible Google Home, Alexa et Apple HomeKit.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Installation 3 minutes</li><li>Wi-Fi intégré sans bridge</li><li>Ouverture auto à l'approche</li><li>Codes invités temporaires</li><li>Toutes les plateformes</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Prix élevé</li><li>Batterie à recharger</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d2">
+        <div class="p-card-top"><div class="rank silver">#2</div><div class="p-title-block"><div class="p-label">Meilleur rapport qualité/prix</div><h2>Yale Linus Smart Lock</h2></div><div class="p-price">~150€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span>4/5</span></div>
+          <p class="p-desc">Yale, marque de confiance dans la serrurerie depuis 150 ans. Le Linus s'installe sur le cylindre existant, bridge Wi-Fi inclus, contrôle d'accès complet depuis l'app Yale Access. Fiable et bien finitionné.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Marque historique fiable</li><li>Bridge Wi-Fi inclus</li><li>Design soigné</li><li>App complète</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Bridge obligatoire accès distant</li><li>Compatibilité domotique limitée</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d3">
+        <div class="p-card-top"><div class="rank bronze">#3</div><div class="p-title-block"><div class="p-label">Meilleure installation facile</div><h2>Tedee GO</h2></div><div class="p-price">~100€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span>4/5</span></div>
+          <p class="p-desc">Parfait pour les locataires : se fixe sur le bouton de la porte en quelques secondes, sans outil, sans modifier la serrure. La clé physique reste utilisable en toutes circonstances.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Installation sans outil</li><li>Idéal locataires</li><li>Clé physique toujours valable</li><li>Prix accessible</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Fonctions limitées vs Nuki</li><li>Bridge vendu séparément</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d4">
+        <div class="p-card-top"><div class="rank other">#4</div><div class="p-title-block"><div class="p-label">Meilleure pour Apple Home</div><h2>Schlage Encode Plus</h2></div><div class="p-price">~280€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span>4/5</span></div>
+          <p class="p-desc">La référence pour les utilisateurs Apple. Support natif Matter et HomeKit, 100 codes d'accès, Wi-Fi intégré sans bridge requis. L'option premium pour un écosystème Apple.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Apple HomeKit natif</li><li>Protocole Matter</li><li>100 codes d'accès</li><li>Wi-Fi sans bridge</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Prix très élevé</li><li>Design américain imposant</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+      <div class="p-card fade-in d5">
+        <div class="p-card-top"><div class="rank other">#5</div><div class="p-title-block"><div class="p-label">Meilleure entrée de gamme</div><h2>eQ-3 HomeMatic</h2></div><div class="p-price">~80€</div></div>
+        <div class="p-body">
+          <div class="p-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span class="star e">★</span><span>3/5</span></div>
+          <p class="p-desc">La solution la moins chère pour tester la serrure connectée. Bluetooth, app eQ-3 simple. Fonctions basiques mais suffisantes pour un premier équipement sans gros investissement.</p>
+          <div class="pc-grid"><div class="pros"><h4>✓ Points forts</h4><ul><li>Prix mini ~80€</li><li>Installation simple</li><li>Bon point d'entrée</li></ul></div><div class="cons"><h4>✗ Points faibles</h4><ul><li>Bluetooth uniquement</li><li>Pas d'accès distant sans bridge</li><li>App basique</li></ul></div></div>
+          <div class="cta-row"><a href="VOTRE_LIEN_AFFILIATION_ICI" class="cta-btn">Voir sur Amazon →</a><span class="aff-note">Lien affilié</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="verdict"><h3>Notre verdict final</h3><p>Pour une expérience complète, le <strong>Nuki Smart Lock Ultra</strong> est imbattable. Budget maîtrisé ? Le <strong>Yale Linus</strong> est excellent. Locataire ou premier essai ? Le <strong>Tedee GO</strong> à 100€ est parfait.</p></div>
+    <p class="disclaimer">⚠️ <strong>Liens d'affiliation :</strong> SecuriCompare participe au programme Amazon Partenaires. Commission perçue sans surcoût pour vous.</p>
+  </div>
+  <div class="more-articles"><div class="more-inner"><h3>Lire aussi</h3><div class="more-grid"><div class="more-card" onclick="showPage('cameras')"><div class="more-card-icon">📷</div><div><h4>Top 5 Caméras de Surveillance 2026</h4><p>De 39€ à 179€</p></div></div><div class="more-card" onclick="showPage('alarmes')"><div class="more-card-icon">🚨</div><div><h4>Top 5 Systèmes d'Alarme 2026</h4><p>Kits connectés sans abonnement</p></div></div></div></div></div>
+  <footer><p>© 2026 SecuriCompare — <a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">Contact</a></p></footer>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + id);
+  if(navEl) navEl.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
